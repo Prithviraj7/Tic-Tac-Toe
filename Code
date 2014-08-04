@@ -1,0 +1,433 @@
+///////////////tic tack toe//\\\\\\\\\\\\\\\\\\\////////////\\\\\/////////\\\\\\\//////////\\\\\\\\\////////
+#include <stdio.h>
+ char board[3][3]={{'.','.','.'},{'.','.','.'},{'.','.','.'}};
+void display_board()
+{
+	 
+	int x=0,y;
+	while(x<3)
+	{
+	    y=0;
+	    while(y<3)
+	    {
+	    	printf("\t%c",board[x][y]);
+	    	y++;
+	    }
+	    printf("\n\n");
+	    x++;
+	}
+	return;
+}
+void fill_es()
+{
+	int l,k=0;
+	while(k<3)
+	{
+		l=0;
+		while(board[k][l]!='.')
+		{
+			l++;
+		}
+		if(board[k][l]=='.')
+		{
+			board[k][l]='O';
+			break;
+		}
+		k++;
+	}
+	return;
+} 
+int c_horizontal_check()
+{
+		int k=0,l,m;
+	while(k<3)
+	{
+		l=0;
+		while(l<3)
+		{
+			m=l+1;
+			while(m<3)
+			{
+				if(board[k][l]=='O'&&board[k][m]=='O')
+				{
+					int d=0;
+					while(d<3&&board[k][d]!='X')
+					{
+						d++;
+					}
+					if(d==3)
+					{
+					return (400+k);
+				    }
+				    else
+				    {
+				    	return 0;
+				    }
+				}
+				m++;
+			}
+			l++;
+		}
+		k++;
+		
+	}
+
+		return 0;
+}
+int c_vertical_check()
+{
+		int k=0,l,m;
+	while(k<3)
+	{
+		int l=0;
+		while(l<3)
+		{
+			int m=l+1;
+			while(m<3)
+			{
+				if(board[l][k]=='O'&&board[m][k]=='O')
+				{
+					int d=0;
+					while(d<3&&board[d][k]!='X')
+					{
+						d++;
+					}
+					if(d==3)
+					{
+					return (500+k);
+				    }
+				    else
+				    {
+				    	return 0;
+				    }///////////////////////return (500+k);
+				}
+				m++;
+			}
+			l++;
+		}
+		k++;
+		
+	}
+			return 0;
+
+}
+int c_diagonal_check()
+{
+   if(board[0][2]=='O'&&board[1][1]=='O'&&board[2][0]=='.')
+   {
+   	 return 620;
+   }
+   else if(board[1][1]=='O'&&board[2][0]=='O'&&board[0][2]=='.')
+   {
+   	 return 602;
+   }
+   else if(board[0][2]=='O'&&board[2][0]=='O'&&board[1][1]=='.')
+   {
+   	return 611;
+   }
+   else if(board[1][1]=='O'&&board[0][0]=='O'&&board[2][2]=='.')
+   {
+   	return 622;
+   }
+   else if(board[1][1]=='O'&&board[2][2]=='O'&&board[0][0]=='.')
+   {
+   	return 600;
+   }
+   else if(board[0][0]=='O'&&board[2][2]=='O'&&board[1][1]=='.')
+   {
+   	return 611;
+   }
+   else
+   {
+   	return 0;
+   }
+}
+int horizontal_check()
+{
+		int k=0;
+	while(k<3)
+	{
+		int l=0;
+		while(l<3)
+		{
+			int m=l+1;
+			while(m<3)
+			{
+				if(board[k][l]=='X'&&board[k][m]=='X')
+				{
+					int d=0;
+					while(d<3&&board[k][d]!='O')
+					{
+						d++;
+					}
+					if(d==3)
+					{
+					return (100+k);
+				    }
+				    else
+				    {
+				    	return 0;
+				    }//return (100+k);
+				}
+				m++;
+			}
+			l++;
+		}
+		k++;
+		
+	}
+		return 0;
+}
+int vertical_check()
+{
+		int k=0;
+	while(k<3)
+	{
+		int l=0;
+		while(l<3)
+		{
+			int m=l+1;
+			while(m<3)
+			{
+				if(board[l][k]=='X'&&board[m][k]=='X')
+				{
+					int d=0;
+					while(d<3&&board[d][k]!='O')
+					{
+						d++;
+					}
+					if(d==3)
+					{
+					return (200+k);
+				    }
+				    else
+				    {
+				    	return 0;
+				    }//return (200+k);
+				}
+				m++;
+			}
+			l++;
+		}
+		k++;
+		
+	}
+		return 0;
+}
+int diagonal_check()////////////////////////PROBLEM!!!!!!!!!!!!!!!!!!!
+{
+   if(board[0][2]=='X'&&board[1][1]=='X'&&board[2][0]=='.')
+   {
+   	 return 320;
+   }
+   else if(board[1][1]=='X'&&board[2][0]=='X'&&board[0][2]=='.')
+   {
+   	 return 302;
+   }
+   else if(board[0][2]=='X'&&board[2][0]=='X'&&board[1][1]=='.')
+   {
+   	return 311;
+   }
+   else if(board[1][1]=='X'&&board[0][0]=='X'&&board[2][2]=='.')
+   {
+   	return 322;
+   }
+   else if(board[1][1]=='X'&&board[2][2]=='X'&&board[0][0]=='.')
+   {
+   	return 300;
+   }
+   else if(board[0][0]=='X'&&board[2][2]=='X'&&board[1][1]=='.')
+   {
+   	return 311;
+   }
+   else
+   {
+   	return 0;
+   }
+}/////////////////////////////////////////
+/////////LET THE USER PLAY!!!!!!!!!!!!!!!!!!!!!
+int let_the_user_play()
+{
+	int x,y;
+	printf("\n enter row and column number\n");
+	scanf("%d %d",&x,&y);
+	board[x-1][y-1]='X';
+	return (10*(x-1) + (y-1));
+}
+int userseries()
+{
+int z=horizontal_check();
+if(z==0)
+{
+	z=vertical_check();
+	if(z==0)
+	{
+		z=diagonal_check();
+		if(z==0)
+		{
+			return 0;
+		}
+		else
+	{
+		return z;
+	}
+	}
+	else
+	{
+		return z;
+	}
+} 
+else
+	{
+		return z;
+	}
+}/////////////////////////////////	SERIES CHECK
+int series_check() 
+{ 
+ int e=c_horizontal_check();
+if(e==0)
+{
+	e=c_vertical_check();
+	if(e==0)
+	{
+		e=c_diagonal_check();
+		if(e==0)
+		{
+			return userseries();
+		}
+		else
+	{
+		return e;
+	}
+	}
+	else
+	{
+		return e;
+	}
+} 
+else
+	{
+		return e;
+	}/////////////////if func returns anything it wont goto userseries butif doesnt hav a series it goes tocheck 
+//userseries
+}
+
+int stop_the_series(int q)
+{
+	if(q/100==1||q/100==4)
+	{
+		int c=0;
+		while(board[q%10][c]!='.'&&c<3)
+		{
+			c++;
+		}
+		board[q%10][c]='O';
+	}
+	else if(q/100==2||q/100==5)
+	{
+		int c=0;
+		while(board[c][q%10]!='.'&&c<3)
+		{
+			c++;
+		}
+		board[c][q%10]='O';
+	}
+	else if(q/100==3||q/100==6)//////////////////change this_ use brute force
+	{
+	
+		board[(q/10)%10][q%10]='O';
+	}
+	if(q/100==4||q/100==5||q/100==6)
+	{
+		return 1;
+	}
+}
+int u_win()
+{
+	
+}
+void make_ya_own_series(int a,int b)////tuf part
+{
+	if(b==1)
+	{
+		if(a!=11)
+		{
+			board[1][1]='O';
+		}
+		else
+		{   
+			fill_es();
+		}
+	}
+	else
+	{
+		if(a%10!=(a/10)%10)
+		{
+			if(board[a%10][(a/10)%10]=='.')
+			{
+			board[a%10][(a/10)%10]='O';
+			}
+			else
+			{
+				fill_es();
+			}
+		}
+		else
+		{  
+			fill_es();
+		}
+	}
+	return;
+}
+int main(int argc)
+{   printf("%d",argc);
+    printf("¡hola friend!! let's play_______________________________________________________\n");
+	int b=0;
+	int umove=0,cmove=0;
+	while(b!=1)
+	{
+	display_board();
+	int z=let_the_user_play();
+	display_board();
+	umove++;
+	if(cmove+umove==9)
+	{
+		b=1;
+		break;
+	}
+	int a=series_check();
+	
+	printf("\nComputer plays this! \n");
+	if(a!=0)
+	{
+			 b=stop_the_series(a);
+			 
+	}
+	
+	else
+	{   
+		make_ya_own_series(z,umove);
+	}
+	cmove++;
+	printf("\n%d",b);
+	int d=userseries();
+	printf("\n%d\n",d);
+	if((d/100==1||d/100==2||d/100==3)&&b!=1)
+	{
+			 display_board();
+			 printf("U WIN \n");
+			 break;
+	}
+	if(cmove+umove==9)
+	{
+		break;
+	}
+	if(b==1)
+	{
+		display_board();
+		printf("computer wins!!!!!!!!");
+	}
+	}
+	
+   printf("\nGAME  OVERRRRRRRRRRRR!!!");
+}
